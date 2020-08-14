@@ -11,6 +11,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Movie_API.Interfaces;
+using Movie_API.Repositories;
 
 namespace Movie_API
 {
@@ -28,6 +30,7 @@ namespace Movie_API
         {
             services.AddControllers();
             services.AddDbContext<MovieDbContext>(options => options.UseSqlServer("Data Source=.;Initial Catalog=MovieDb;Integrated Security=True"));
+            services.AddScoped<IMovieRepository, MovieRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
