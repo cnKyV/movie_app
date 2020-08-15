@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Movie_API;
 
 namespace Movie_API.Migrations
 {
     [DbContext(typeof(MovieDbContext))]
-    partial class MovieDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200815091541_ActorsTableAdded")]
+    partial class ActorsTableAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -62,24 +64,6 @@ namespace Movie_API.Migrations
                     b.ToTable("ActorMovie");
                 });
 
-            modelBuilder.Entity("Movie_API.Entities.Director", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Surname")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Directors");
-                });
-
             modelBuilder.Entity("Movie_API.Entities.Movie", b =>
                 {
                     b.Property<int>("Id")
@@ -90,9 +74,6 @@ namespace Movie_API.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("DirectorId")
-                        .HasColumnType("int");
-
                     b.Property<double>("Length")
                         .HasColumnType("float");
 
@@ -100,8 +81,6 @@ namespace Movie_API.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("DirectorId");
 
                     b.ToTable("Movies");
                 });
@@ -115,13 +94,6 @@ namespace Movie_API.Migrations
                     b.HasOne("Movie_API.Entities.Movie", "Movie")
                         .WithMany("Actors")
                         .HasForeignKey("MovieId");
-                });
-
-            modelBuilder.Entity("Movie_API.Entities.Movie", b =>
-                {
-                    b.HasOne("Movie_API.Entities.Director", null)
-                        .WithMany("Movies")
-                        .HasForeignKey("DirectorId");
                 });
 #pragma warning restore 612, 618
         }

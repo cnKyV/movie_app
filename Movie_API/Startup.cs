@@ -26,11 +26,13 @@ namespace Movie_API
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public void ConfigureServices(IServiceCollection services)//dependency injections r here
         {
             services.AddControllers();
             services.AddDbContext<MovieDbContext>(options => options.UseSqlServer("Data Source=.;Initial Catalog=MovieDb;Integrated Security=True"));
             services.AddScoped<IMovieRepository, MovieRepository>();
+            services.AddScoped<IActorRepository, ActorRepository>();
+            services.AddScoped<IDirectorRepository, DirectorRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,7 +48,7 @@ namespace Movie_API
             app.UseRouting();
 
             app.UseAuthorization();
-
+            app.UseCors(c => c.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

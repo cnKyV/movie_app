@@ -11,5 +11,6 @@ namespace Movie_API.Entities
         public string Name { get; set; }
         public string Description { get; set; }
         public double Length { get; set; }
+        public ICollection<ActorMovie> Actors{ get; set; }
     }
 }

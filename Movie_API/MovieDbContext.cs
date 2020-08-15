@@ -14,6 +14,9 @@ namespace Movie_API
 
         }
         public DbSet<Movie> Movies { get; set; }
+        public DbSet<Actor> Actors { get; set; }
+        public DbSet<ActorMovie> ActorMovie { get; set; }
+        public DbSet<Director> Directors { get; set; }
 
     }
 }
