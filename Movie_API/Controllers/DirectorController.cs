@@ -53,9 +53,15 @@ namespace Movie_API.Controllers
         public IActionResult Update(DirectorUpdateModel directorUpdateModel)
         {
             Director director = new Director();
+            director.Id = directorUpdateModel.Id;
             director.Name = directorUpdateModel.Name;
             director.Surname = directorUpdateModel.Surname;
-            
+            director.Movies = new List<Movie>();
+            foreach (var movie in directorUpdateModel.Movies)
+            {
+                director.Movies.Add(_movieRepository.GetById(movie));
+                
+            }
             return Ok(_directorRepository.Update(director));
         }
         [HttpDelete]

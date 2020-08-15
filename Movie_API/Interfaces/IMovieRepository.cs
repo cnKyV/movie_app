@@ -11,8 +11,8 @@ namespace Movie_API.Interfaces
     {
         IEnumerable<Movie> GetAll();
         Movie GetById(int id);
-        bool Create(MovieCreateModel model);
-        bool Update(MovieUpdateModel model);
+        bool Create(Movie movie);
+        bool Update(Movie movie);
         bool DeleteById(int id);
     }
 }

@@ -63,10 +63,14 @@ namespace Movie_API.Repositories
 
         public bool Update(Director director)
         {
-            var query = _movieDbContext.Directors.FirstOrDefault(i => i.Id == director.Id);
+            var query = _movieDbContext.Directors.Include(i=>i.Movies).FirstOrDefault(i => i.Id == director.Id);
             query.Name = director.Name;
             query.Surname = director.Surname;
-            query.Movies = director.Movies;
+            query.Movies.Clear();
+            foreach (var movie in director.Movies)
+            {
+                query.Movies.Add(movie);
+            }
             try
             {
                 _movieDbContext.SaveChanges();

@@ -17,23 +17,41 @@ namespace Movie_API.Controllers
 
         private readonly MovieDbContext _movieDbContext;
         private readonly IMovieRepository _movieRepository;
+        private readonly IActorRepository _actorRepository;
 
 
 
         private readonly ILogger<MovieController> _logger;
 
-        public MovieController(ILogger<MovieController> logger, MovieDbContext movieDbContext, IMovieRepository movieRepository)
+        public MovieController(ILogger<MovieController> logger, MovieDbContext movieDbContext, IMovieRepository movieRepository, IActorRepository actorRepository)
         {
             _logger = logger;
             _movieDbContext = movieDbContext; //dependency injection
             _movieRepository = movieRepository;
+            _actorRepository = actorRepository;
         }
 
         [HttpPost]
         public IActionResult Create(MovieCreateModel movieCreateModel)
         {
-
-            return Ok(_movieRepository.Create(movieCreateModel));
+            Movie movie = new Movie();
+            movie.Name = movieCreateModel.Name;
+            movie.Description = movieCreateModel.Description;
+            movie.Length = movieCreateModel.Length;
+            
+            movie.Actors = new List<ActorMovie>();
+            foreach (var actor in movieCreateModel.Actors)
+            {
+                ActorMovie actorMovie = new ActorMovie();
+                var query = _actorRepository.GetById(actor);
+                actorMovie.Actor = query;
+                actorMovie.Movie = movie;
+                movie.Actors.Add(actorMovie);
+            }
+            
+            
+            
+            return Ok(_movieRepository.Create(movie));
             
         }
         [HttpGet]
@@ -52,9 +70,9 @@ namespace Movie_API.Controllers
             return Ok(movie);
         }
         [HttpPut]
-        public IActionResult Update(MovieUpdateModel model)
+        public IActionResult Update(Movie movie)
         {
-            return Ok(_movieRepository.Update(model));
+            return Ok(_movieRepository.Update(movie));
         }
         [HttpDelete("{id}")]
         public IActionResult DeleteById(int id)

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Movie_API.Entities;
 using Movie_API.Interfaces;
 using Movie_API.Models;
@@ -25,17 +26,14 @@ namespace Movie_API.Repositories
         }
         public Movie GetById(int id)
         {
-            var movie = _movieDbContext.Movies.FirstOrDefault(i => i.Id == id);
+            var movie = _movieDbContext.Movies.Include(i=> i.Actors).ThenInclude(i=>i.Actor).FirstOrDefault(i => i.Id == id);
             return movie;
         }
         #endregion
 
-        public bool Create(MovieCreateModel model)
+        public bool Create(Movie movie)
         {
-            var movie = new Movie();
-            movie.Name = model.Name;
-            movie.Description = model.Description;
-            movie.Length = model.Length;
+           
             try
             {
                 _movieDbContext.Movies.Add(movie);
@@ -50,12 +48,12 @@ namespace Movie_API.Repositories
             
         }
 
-        public bool Update(MovieUpdateModel model)
+        public bool Update(Movie movie)
         {
-            var movie = _movieDbContext.Movies.FirstOrDefault(i => i.Id == model.Id);
-            movie.Name = model.Name;
-            movie.Description = model.Description;
-            movie.Length = model.Length;
+            var query = _movieDbContext.Movies.FirstOrDefault(i => i.Id == movie.Id);
+            query.Name = movie.Name;
+            query.Description = movie.Description;
+            query.Length = movie.Length;
             try
             {
                 _movieDbContext.SaveChanges();
