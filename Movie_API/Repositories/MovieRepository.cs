@@ -31,7 +31,7 @@ namespace Movie_API.Repositories
         }
         #endregion
 
-        public bool Create(Movie movie)
+        public Movie Create(Movie movie)
         {
            
             try
@@ -42,18 +42,28 @@ namespace Movie_API.Repositories
             catch (Exception)
             {
 
-                return false;
+                return null;
             }
-            return true;
+            return movie;
             
         }
 
-        public bool Update(Movie movie)
+        public Movie Update(Movie movie)
         {
             var query = _movieDbContext.Movies.FirstOrDefault(i => i.Id == movie.Id);
             query.Name = movie.Name;
             query.Description = movie.Description;
             query.Length = movie.Length;
+            if (query.Actors != null)
+            {
+                query.Actors.Clear();
+                foreach (var actor in movie.Actors)
+                {
+                    query.Actors.Add(actor);
+                }
+            }
+            
+            
             try
             {
                 _movieDbContext.SaveChanges();
@@ -61,9 +71,9 @@ namespace Movie_API.Repositories
             catch (Exception)
             {
 
-                return false;
+                return null;
             }
-            return true;
+            return query;
         }
 
         public bool DeleteById(int id)

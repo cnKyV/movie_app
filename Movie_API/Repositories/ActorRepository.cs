@@ -1,4 +1,5 @@
-﻿using Movie_API.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using Movie_API.Entities;
 using Movie_API.Interfaces;
 using Movie_API.Models;
 using System;
@@ -22,12 +23,12 @@ namespace Movie_API.Repositories
         }
         public Actor GetById(int id)
         {
-            var movie = _movieDbContext.Actors.FirstOrDefault(i => i.Id == id);
+            var movie = _movieDbContext.Actors.Include(i=> i.Movies).FirstOrDefault(i => i.Id == id);
             return movie;
         }
 
 
-        public bool Create(Actor actor)
+        public Actor Create(Actor actor)
         {
 
             try
@@ -38,9 +39,9 @@ namespace Movie_API.Repositories
             catch (Exception)
             {
 
-                return false;
+                return null;
             }
-            return true;
+            return actor;
 
         }
 

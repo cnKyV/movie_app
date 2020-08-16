@@ -10,7 +10,7 @@ namespace Movie_API.Interfaces
     {
         IEnumerable<Actor> GetAll();
         Actor GetById(int id);
-        bool Create(Actor actor);
+        Actor Create(Actor actor);
         bool Update(Actor actor);
         bool DeleteById(int id);
     }
