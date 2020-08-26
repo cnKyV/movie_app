@@ -1,4 +1,4 @@
-﻿using Movie_API.Entities;
+﻿using Movie_API.Contracts.Models.ResponseModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,6 +17,6 @@ namespace Movie_API.Models.ResponseModels
         [NotMapped]
         public string FullName => Surname + ", " + Name;
         public int Age { get; set; }
-        public ICollection<ActorMovie> Movies { get; set; }
+        public ICollection<ActorMovieResponseModel> Movies { get; set; }
     }
 }

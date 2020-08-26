@@ -15,5 +15,9 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.7" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Movie_API.Contracts\Movie_API.Contracts.csproj" />
+  </ItemGroup>
+
 
 </Project>

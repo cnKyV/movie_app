@@ -19,8 +19,7 @@ namespace Movie_API.Controllers
     public class ActorController : ControllerBase
     {
         private readonly IActorRepository _actorRepository;
-        private readonly IMovieRepository _movieRepository;
-        private readonly MovieDbContext _movieDbContext;
+        private readonly IMovieRepository _movieRepository;     
         private readonly IMapper _mapper;
         public ActorController(IActorRepository actorRepository, IMapper mapper, IMovieRepository movieRepository)
         {
@@ -46,10 +45,6 @@ namespace Movie_API.Controllers
                 actor.Movies.Add(actorMovie);
             }
             ActorResponseModel actorResponse = _mapper.Map<ActorResponseModel>(_actorRepository.Create(actor));
-            foreach (var item in actorResponse.Movies)
-            {
-                item.Actor = null;
-            }
             return Ok(actorResponse);
         }
         [HttpGet]

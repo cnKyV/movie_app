@@ -1,4 +1,5 @@
-﻿using Movie_API.Entities;
+﻿using Movie_API.Contracts.Models.ResponseModels;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,6 @@ namespace Movie_API.Models.ResponseModels
         public string Name { get; set; }
         public string Description { get; set; }
         public double Length { get; set; }
-        public ICollection<ActorMovie> Actors { get; set; }
+        public ICollection<ActorMovieResponseModel> Actors { get; set; }
     }
 }
