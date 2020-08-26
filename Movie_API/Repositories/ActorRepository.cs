@@ -13,15 +13,15 @@ namespace Movie_API.Repositories
     {
         private readonly MovieDbContext _movieDbContext;
         private readonly DbContext _dbContext;
-            public ActorRepository(MovieDbContext movieDbContext, DbContext dbContext)
+            public ActorRepository(MovieDbContext movieDbContext)
         {
             _movieDbContext = movieDbContext;
-            _dbContext = dbContext;
+            
         }
         public IEnumerable<Actor> GetAll()
         {
             var actor = _movieDbContext.Actors;
-            var actor2 = _dbContext.Set<Actor>(); //direk dbcontextden çektik
+            
             return actor;
         }
         public Actor GetById(int id)

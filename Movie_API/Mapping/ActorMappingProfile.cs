@@ -16,7 +16,6 @@ namespace Movie_API.Mapping
             CreateMap<Actor, ActorResponseModel>();
             CreateMap<ActorCreateModel, Actor>()
                 .ForMember(i => i.Movies, j => j.MapFrom(k => new List<ActorMovie>()));
-           
         }
     }
 }

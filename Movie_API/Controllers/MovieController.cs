@@ -65,11 +65,7 @@ namespace Movie_API.Controllers
             }
             
             MovieResponseModel movieResponse = _mapper.Map<MovieResponseModel>(_movieRepository.Create(movieResponseModel));
-            foreach (var item in movieResponse.Actors)
-            {
-                item.Movie = null;
-                item.Actor.Movies = null;
-            }
+
             return Ok(movieResponse);
             
         }
@@ -120,11 +116,6 @@ namespace Movie_API.Controllers
                 movie.Actors.Add(actor1);
             }
             MovieResponseModel movieResponse = _mapper.Map<MovieResponseModel>(_movieRepository.Update(movie));
-            foreach (var item in movieResponse.Actors)
-            {
-                item.Movie = null;
-                item.Actor.Movies = null;
-            }
             return Ok(movieResponse);
         }
         [HttpDelete("{id}")]
