@@ -12,7 +12,7 @@ namespace Movie_API.Repositories
     public class ActorRepository :IActorRepository
     {
         private readonly MovieDbContext _movieDbContext;
-        private readonly DbContext _dbContext;
+        
             public ActorRepository(MovieDbContext movieDbContext)
         {
             _movieDbContext = movieDbContext;

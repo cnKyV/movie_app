@@ -1,0 +1,18 @@
+﻿@page "/actors"
+@inject HttpClient httpClient
+<h3>Actors</h3>
+
+@if (!(_actors is null))
+{
+    foreach (var item in _actors)
+    {
+        <ul>
+
+            <li>@item.FullName</li>
+            <li>@item.Age</li>
+
+        </ul>
+
+    }
+    <button @onclick="BtnClick">Click</button>
+}
