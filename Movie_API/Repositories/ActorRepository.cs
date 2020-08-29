@@ -20,13 +20,13 @@ namespace Movie_API.Repositories
         }
         public IEnumerable<Actor> GetAll()
         {
-            var actor = _movieDbContext.Actors;
+            var actor = _movieDbContext.Actors.Include(i=>i.Movies).ThenInclude(i=>i.Movie);
             
             return actor;
         }
         public Actor GetById(int id)
         {
-            var movie = _movieDbContext.Actors.Include(i=> i.Movies).FirstOrDefault(i => i.Id == id);
+            var movie = _movieDbContext.Actors.Include(i=> i.Movies).ThenInclude(i=>i.Movie).FirstOrDefault(i => i.Id == id);
             return movie;
         }
 
@@ -48,9 +48,9 @@ namespace Movie_API.Repositories
 
         }
 
-        public bool Update(Actor actor)
+        public Actor Update(Actor actor)
         {
-            var actors = _movieDbContext.Actors.FirstOrDefault(i => i.Id == actor.Id);
+            var actors = _movieDbContext.Actors.Include(i=>i.Movies).ThenInclude(i=>i.Movie).FirstOrDefault(i => i.Id == actor.Id);
             actors.Name = actor.Name;
             actors.Surname = actor.Surname;
             actors.Age = actor.Age;
@@ -62,14 +62,14 @@ namespace Movie_API.Repositories
             catch (Exception)
             {
 
-                return false;
+                return null;
             }
-            return true;
+            return actor;
         }
 
         public bool DeleteById(int id)
         {
-            var actor = _movieDbContext.Actors.FirstOrDefault(i => i.Id == id);
+            var actor = _movieDbContext.Actors.Include(i=>i.Movies).FirstOrDefault(i => i.Id == id);
             try
             {
                 _movieDbContext.Remove(actor);

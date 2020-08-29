@@ -30,11 +30,11 @@ namespace Movie_API.Mapping
         public MovieMappingProfile()
         {
             CreateMap<Movie, MovieResponseModel>();
-                //.ForMember(i => i.Actors, j => j.MapFrom(k => k.Actors.Select(w => w.Id).ToList()));
+               
             CreateMap<MovieCreateModel, Movie>()
                 .ForMember(i => i.Actors, j => j.MapFrom(k => new List<ActorMovie>()));
             CreateMap<Movie, MovieCreateModel>();
-
+                
             CreateMap<Actor, ActorMovie>();
             CreateMap<MovieUpdateModel, Movie>()
                 .ForMember(i => i.Actors, j => j.MapFrom(k => new List<ActorMovie>()));

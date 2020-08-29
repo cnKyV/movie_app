@@ -20,7 +20,7 @@ namespace Movie_API
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseStartup<Startup>();
+                    webBuilder.UseStartup<Startup>().UseUrls("http://192.168.1.36:5000");
                 });
     }
 }

@@ -13,16 +13,14 @@ namespace Movie_UI.Pages
         private IEnumerable<ActorResponseModel> _actors;
         protected override async Task OnInitializedAsync()
         {
-            var result = await httpClient.GetAsync(Address);
+            var result = await httpClient.GetAsync("api/actor");
             var readasstring = await result.Content.ReadAsStringAsync();
            _actors = JsonConvert.DeserializeObject<IEnumerable<ActorResponseModel>>(readasstring);
+            Console.WriteLine(Address);
             StateHasChanged();
         }
         [Parameter]
         public string Address { get; set; }
-        private void BtnClick()
-        {
-            _actors = null;
-        }
+
     }
 }

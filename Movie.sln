@@ -5,9 +5,9 @@ VisualStudioVersion = 16.0.30330.147
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Movie_API", "Movie_API\Movie_API.csproj", "{2802445C-DFA2-4E6A-9EAD-AD1B29783448}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Movie_UI", "Movie_UI\Movie_UI.csproj", "{F9A100FF-0984-48DF-8EB2-0BE1E607A509}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Movie_UI", "Movie_UI\Movie_UI.csproj", "{F9A100FF-0984-48DF-8EB2-0BE1E607A509}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Movie.Contracts", "Movie.Contracts\Movie.Contracts.csproj", "{D21894D3-5F4F-4898-83E5-4B30C3232F19}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Movie.Contracts", "Movie.Contracts\Movie.Contracts.csproj", "{D21894D3-5F4F-4898-83E5-4B30C3232F19}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

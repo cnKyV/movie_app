@@ -1,0 +1,12 @@
+﻿@inject HttpClient httpClient
+@page "/add_movie"
+<EditForm Model="_movieCreateModel" OnValidSubmit="Savetodb">
+    <div class="col-10">
+        <p>Name: <input type="text" name="inputName" @bind-value="_movieCreateModel.Name" /></p>
+        <p>Description: <input type="text" name="inputDescription" @bind-value="_movieCreateModel.Description" /></p>
+        <p>Length: <input type="number" name="inputLength" @bind-value="_movieCreateModel.Length" /></p>
+        <p><button type="submit">Submit</button></p>
+    </div>
+
+
+</EditForm>

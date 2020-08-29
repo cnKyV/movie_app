@@ -1,0 +1,12 @@
+﻿@page "/add_actor"
+@inject HttpClient httpClient
+<EditForm Model="_actorCreateModel" OnValidSubmit="Savetodb">
+    <div class="col-10">
+        <p>Name: <input type="text" name="inputName" @bind-value="_actorCreateModel.Name" /></p>
+        <p>Surname: <input type="text" name="inputSurname" @bind-value="_actorCreateModel.Surname" /></p>
+        <p>Age: <input type="number" name="inputAge" @bind-value="_actorCreateModel.Age" /></p>
+        <p><button type="submit">Submit</button></p>
+    </div>
+
+    
+</EditForm>

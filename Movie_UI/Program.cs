@@ -17,7 +17,7 @@ namespace Movie_UI
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("app");
 
-            builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("http://192.168.1.40:5000") });
+            builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("http://192.168.1.36:5000/") });
 
             await builder.Build().RunAsync();
         }

@@ -17,7 +17,7 @@ namespace Movie_API.Controllers
     public class MovieController : ControllerBase
     {
 
-        private readonly MovieDbContext _movieDbContext;
+        
         private readonly IMovieRepository _movieRepository;
         private readonly IActorRepository _actorRepository;
         private readonly IMapper _mapper;
@@ -26,10 +26,10 @@ namespace Movie_API.Controllers
 
         private readonly ILogger<MovieController> _logger;
 
-        public MovieController(ILogger<MovieController> logger, MovieDbContext movieDbContext, IMovieRepository movieRepository, IActorRepository actorRepository, IMapper mapper)
+        public MovieController(ILogger<MovieController> logger, IMovieRepository movieRepository, IActorRepository actorRepository, IMapper mapper)
         {
             _logger = logger;
-            _movieDbContext = movieDbContext; //dependency injection
+             //dependency injection
             _movieRepository = movieRepository;
             _actorRepository = actorRepository;
             _mapper = mapper;
@@ -74,18 +74,18 @@ namespace Movie_API.Controllers
         {
             #region AutoMapper'siz
             List<MovieResponseModel> movieResponseModels = new List<MovieResponseModel>();
-            foreach (var item in _movieRepository.GetAll())//Mapping
-            {
-                MovieResponseModel movieResponseModel = new MovieResponseModel
-                {
-                    Id = item.Id,
-                    Name = item.Name,
-                    Description = item.Description,
-                    Length = item.Length
-                };
-                movieResponseModels.Add(movieResponseModel);
+            //foreach (var item in _movieRepository.GetAll())//Mapping
+            //{
+            //    MovieResponseModel movieResponseModel = new MovieResponseModel
+            //    {
+            //        Id = item.Id,
+            //        Name = item.Name,
+            //        Description = item.Description,
+            //        Length = item.Length
+            //    };
+            //    movieResponseModels.Add(movieResponseModel);
 
-            }
+            //}
             #endregion
 
             //AutoMapper

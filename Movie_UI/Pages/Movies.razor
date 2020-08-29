@@ -1,0 +1,23 @@
+﻿@page "/movies"
+@inject HttpClient httpClient
+
+@if (!(_movies is null))
+{
+    foreach (var item in _movies)
+    {
+        <ul>
+
+            <li>@item.Name</li>
+            <li>@item.Description</li>
+            <li>@item.Length</li>
+            <li>                
+            @foreach (var item2 in item.Actors)
+                {
+                    @item2.ActorId <a>, </a>
+                }</li>
+
+            
+</ul>
+
+    }
+}

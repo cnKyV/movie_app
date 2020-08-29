@@ -13,6 +13,7 @@ namespace Movie_API.Repositories
     public class MovieRepository : IMovieRepository
     {
         private readonly MovieDbContext _movieDbContext;
+        
         public MovieRepository(MovieDbContext movieDbContext)
         {
             _movieDbContext = movieDbContext;
@@ -21,7 +22,7 @@ namespace Movie_API.Repositories
         #region Get
         public IEnumerable<Movie> GetAll()
         {
-            var movie = _movieDbContext.Movies;
+            var movie = _movieDbContext.Movies.Include(i=>i.Actors).ThenInclude(i=>i.Actor);
             return movie;
         }
         public Movie GetById(int id)
@@ -47,10 +48,9 @@ namespace Movie_API.Repositories
             return movie;
             
         }
-
         public Movie Update(Movie movie)
         {
-            var query = _movieDbContext.Movies.FirstOrDefault(i => i.Id == movie.Id);
+            var query = _movieDbContext.Movies.Include(i=>i.Actors).FirstOrDefault(i => i.Id == movie.Id);
             query.Name = movie.Name;
             query.Description = movie.Description;
             query.Length = movie.Length;
@@ -62,15 +62,12 @@ namespace Movie_API.Repositories
                     query.Actors.Add(actor);
                 }
             }
-            
-            
             try
             {
                 _movieDbContext.SaveChanges();
             }
             catch (Exception)
             {
-
                 return null;
             }
             return query;
@@ -78,7 +75,7 @@ namespace Movie_API.Repositories
 
         public bool DeleteById(int id)
         {
-            var movie = _movieDbContext.Movies.FirstOrDefault(i => i.Id == id);
+            var movie = _movieDbContext.Movies.Include(i=>i.Actors).FirstOrDefault(i => i.Id == id);
             try
             {
                 _movieDbContext.Remove(movie);

@@ -14,8 +14,9 @@ using Movie_API.Repositories;
 
 namespace Movie_API.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
+    
     public class ActorController : ControllerBase
     {
         private readonly IActorRepository _actorRepository;
@@ -62,12 +63,13 @@ namespace Movie_API.Controllers
             return Ok(actorResponse);
         }
         [HttpPut]
-        public IActionResult Update(Actor actor)
+        public IActionResult Update(ActorUpdateModel actorUpdateModel)
         {
+            Actor actor = _mapper.Map<Actor>(actorUpdateModel);
             ActorResponseModel actorresponse = _mapper.Map<ActorResponseModel>(_actorRepository.Update(actor));
             return Ok(actorresponse);
         }
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult DeleteById(int id)
         {
             return Ok(_actorRepository.DeleteById(id));
