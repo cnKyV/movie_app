@@ -14,5 +14,6 @@ namespace Movie_API.Interfaces
         Movie Create(Movie movie);
         Movie Update(Movie movie);
         bool DeleteById(int id);
+        IEnumerable<string> ReturnNamesById(IEnumerable<int> id);
     }
 }

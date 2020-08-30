@@ -12,6 +12,7 @@ namespace Movie_API.Interfaces
         Actor GetById(int id);
         Actor Create(Actor actor);
         Actor Update(Actor actor);
+        IEnumerable<string> ReturnNamesById(IEnumerable<int> id);
         bool DeleteById(int id);
     }
 }

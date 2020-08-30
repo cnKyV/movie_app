@@ -105,6 +105,13 @@ namespace Movie_API.Controllers
  
             return Ok(movieResponses);
         }
+        [HttpPost]
+        [Route("ReturnNameById")]
+        public IActionResult ReturnNamesById([FromBody]IEnumerable<int> id)
+        {
+            return Ok(_movieRepository.ReturnNamesById(id));
+        }
+
         [HttpPut]
         public IActionResult Update(MovieUpdateModel movieUpdateModel)
         {

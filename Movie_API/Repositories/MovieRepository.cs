@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.EntityFrameworkCore;
 using Movie_API.Entities;
 using Movie_API.Interfaces;
@@ -90,5 +91,14 @@ namespace Movie_API.Repositories
             return true;
         }
 
+        public IEnumerable<string> ReturnNamesById(IEnumerable<int> id)
+        {
+            var query = new List<string>();
+            foreach (var Id in id)
+            {
+                query.Add(_movieDbContext.Movies.FirstOrDefault(i=>i.Id == Id).Name);
+            }
+            return query;
+        }
     }
 }

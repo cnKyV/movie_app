@@ -1,7 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc.Formatters;
+using Microsoft.EntityFrameworkCore;
 using Movie_API.Entities;
 using Movie_API.Interfaces;
 using Movie_API.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -82,6 +84,16 @@ namespace Movie_API.Repositories
                 return false;
             }
             return true;
+        }
+
+        public IEnumerable<string> ReturnNamesById(IEnumerable<int> id)
+        {
+            var query = new List<string>();
+            foreach (var Id in id)
+            {
+              query.Add(_movieDbContext.Actors.FirstOrDefault(i => i.Id == Id).Name);
+            }
+            return query;
         }
     }
 }

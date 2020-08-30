@@ -54,6 +54,12 @@ namespace Movie_API.Controllers
 
             IEnumerable<ActorResponseModel> actorResponses = _mapper.Map<IEnumerable<ActorResponseModel>>(_actorRepository.GetAll());
             return Ok(actorResponses);
+        }      
+        [HttpPost]
+        [Route("ReturnNameById")]
+        public IActionResult ReturnNameById([FromBody]IEnumerable<int> id)
+        {
+            return Ok(_actorRepository.ReturnNamesById(id));
         }        
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
