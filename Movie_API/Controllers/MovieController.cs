@@ -39,34 +39,34 @@ namespace Movie_API.Controllers
         public IActionResult Create(MovieCreateModel movieCreateModel)
         {
             #region automappersiz
-            //Movie movie = new Movie();
-            //movie.Name = movieCreateModel.Name;
-            //movie.Description = movieCreateModel.Description;
-            //movie.Length = movieCreateModel.Length;
-            //movie.Actors = new List<ActorMovie>();
-            //foreach (var actor in movieCreateModel.Actors)
-            //{
-            //    ActorMovie actorMovie = new ActorMovie();
-            //    var query = _actorRepository.GetById(actor);
-            //    actorMovie.Actor = query;
-            //    actorMovie.Movie = movie;
-            //    movie.Actors.Add(actorMovie);
-            //}
+            Movie movie = new Movie();
+            movie.Name = movieCreateModel.Name;
+            movie.Description = movieCreateModel.Description;
+            movie.Length = movieCreateModel.Length;
+            movie.Actors = new List<ActorMovie>();
+            foreach (var actor in movieCreateModel.Actors)
+            {
+                ActorMovie actorMovie = new ActorMovie();
+                var query = _actorRepository.GetById(actor);
+                actorMovie.Actor = query;
+                actorMovie.Movie = movie;
+                movie.Actors.Add(actorMovie);
+            }
 
             #endregion
 
-            Movie movieResponseModel = _mapper.Map<Movie>(movieCreateModel);
-      
-            foreach (var actor in movieCreateModel.Actors)
-            {
-                ActorMovie actor1 = new ActorMovie();
-                actor1.Actor = _actorRepository.GetById(actor);
-                movieResponseModel.Actors.Add(actor1);
-            }
-            
-            MovieResponseModel movieResponse = _mapper.Map<MovieResponseModel>(_movieRepository.Create(movieResponseModel));
+            // Movie movieResponseModel = _mapper.Map<Movie>(movieCreateModel);
+            //
+            // foreach (var actor in movieCreateModel.Actors)
+            // {
+            //     ActorMovie actor1 = new ActorMovie();
+            //     actor1.Actor = _actorRepository.GetById(actor);
+            //     movieResponseModel.Actors.Add(actor1);
+            // }
+            //
+            // MovieResponseModel movieResponse = _mapper.Map<MovieResponseModel>(_movieRepository.Create(movieResponseModel));
 
-            return Ok(movieResponse);
+            return Ok(movie);
             
         }
         [HttpGet]
@@ -74,23 +74,23 @@ namespace Movie_API.Controllers
         {
             #region AutoMapper'siz
             List<MovieResponseModel> movieResponseModels = new List<MovieResponseModel>();
-            //foreach (var item in _movieRepository.GetAll())//Mapping
-            //{
-            //    MovieResponseModel movieResponseModel = new MovieResponseModel
-            //    {
-            //        Id = item.Id,
-            //        Name = item.Name,
-            //        Description = item.Description,
-            //        Length = item.Length
-            //    };
-            //    movieResponseModels.Add(movieResponseModel);
+            foreach (var item in _movieRepository.GetAll())//Mapping
+            {
+                MovieResponseModel movieResponseModel = new MovieResponseModel
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    Description = item.Description,
+                    Length = item.Length
+                };
+                movieResponseModels.Add(movieResponseModel);
 
-            //}
+            }
             #endregion
 
             //AutoMapper
-            IEnumerable<MovieResponseModel> movieResponses = _mapper.Map<IEnumerable<MovieResponseModel>>(_movieRepository.GetAll());
-            return Ok(movieResponses);
+            // IEnumerable<MovieResponseModel> movieResponses = _mapper.Map<IEnumerable<MovieResponseModel>>(_movieRepository.GetAll());
+            return Ok(movieResponseModels);
             
         }
         [HttpGet("{id}")]

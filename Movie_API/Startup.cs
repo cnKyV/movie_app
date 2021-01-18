@@ -30,7 +30,7 @@ namespace Movie_API
         public void ConfigureServices(IServiceCollection services)//dependency injections r here
         {
             services.AddControllers().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
-            services.AddDbContext<MovieDbContext>(options => options.UseSqlServer("Data Source=.;Initial Catalog=MovieDb;Integrated Security=True"));
+            services.AddDbContext<MovieDbContext>(options => options.UseSqlServer("Data Source=DESKTOP-J7U37Q5;Initial Catalog=MovieDb;Integrated Security=True"));
             services.AddScoped<IMovieRepository, MovieRepository>();
             services.AddScoped<IActorRepository, ActorRepository>();
             services.AddScoped<IDirectorRepository, DirectorRepository>();
